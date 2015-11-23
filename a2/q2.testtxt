@@ -1,0 +1,70 @@
+Script started on Tue Oct 13 14:15:40 2015
+sk5lee@ubuntu1204-006:~/cs343/a2$ make cardgame
+make: `cardgame' is up to date.
+sk5lee@ubuntu1204-006:~/cs343/a2$ ./cardgame 2 2
+Players: 5    Cards: 181
+P0	P1	P2	P3	P4	
+		3:162>X	8:165<*	8:173<	
+	3:156>		3:159<*		
+	3:152>X		1:155<*		
+6:138>			2:150>*	6:144>X	
+2:133<X			3:135<*		
+			#133#		
+
+
+Players: 9    Cards: 40
+P0	P1	P2	P3	P4	P5	P6	P7	P8	
+					3:18>	8:21<*	6:29<X	5:35<X	
+7:5<						6:12>*			
+4:0#						1:4>X			
+sk5lee@ubuntu1204-006:~/cs343/a2$ echo "The first game above shows a scenario wh ere all players die before cards run out."
+The first game above shows a scenario where all players die before cards run out.
+sk5lee@ubuntu1204-006:~/cs343/a2$ echo "The second game above shows a scenario w here the deck runs out before all players die."
+The second game above shows a scenario where the deck runs out before all players die.
+sk5lee@ubuntu1204-006:~/cs343/a2$ ./cardgame 2 7
+Players: 8    Cards: 108
+P0	P1	P2	P3	P4	P5	P6	P7	
+			6:102>	4:98>*	1:97<			
+			3:92>X	2:95<*				
+	3:84>	2:87<*		3:89<				
+		8:76>*		7:69<				
+		1:68>		2:66>*	1:65<			
+		1:62>*		2:63<X	7:55<			
+	7:44>	1:54>X			3:51<*			
+					8:36>	6:30>*	7:23<X	
+					1:18>	4:19<*		
+					1:12>	5:13<*		
+3:7<X						2:10>*		
+	6:0#					1:6>		
+
+
+Players: 9    Cards: 18
+P0	P1	P2	P3	P4	P5	P6	P7	P8	
+				8:10>*	5:5<X				
+				5:0#X					
+sk5lee@ubuntu1204-006:~/cs343/a2$ echo "The second game above shows a scenario w here a player wins and dies at the same time.
+The second game above shows a scenario where a player wins and dies at the same time.
+sk5lee@ubuntu1204-006:~/cs343/a2$ ./cardgame 2 10
+Players: 8    Cards: 101
+P0	P1	P2	P3	P4	P5	P6	P7	
+5:96>	8:88>	4:84>	6:78>*	7:71<				
+		7:60>	4:67<*					
+		5:54>*	1:59<X	3:51<				
+5:25<X		5:46>		8:38>	4:34>	2:32>	2:30>*	
+	7:5<					7:12>*	6:19<X	
+					1:0#	4:1<X		
+
+
+Players: 4    Cards: 146
+P0	P1	P2	P3	
+1:145<*			1:144>X	
+2:142>	6:136>*	7:129<		
+	7:122>*	3:119<		
+4:106>X	7:112>*	2:110>		
+	2:104>*	4:100>		
+	5:95<X	#95#X		
+sk5lee@ubuntu1204-006:~/cs343/a2$ echo "The second game above shows a scenario w here a player wins and dies at the same time, and the deck still has cards."
+The second game above shows a scenario where a player wins and dies at the same time, and the deck still has cards.
+sk5lee@ubuntu1204-006:~/cs343/a2$ exit
+
+Script done on Tue Oct 13 14:20:32 2015

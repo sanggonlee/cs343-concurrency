@@ -1,0 +1,12 @@
+i.
+original without optimization: 23.842s
+transformed without optimization: 25.525s
+
+original with optimization: 21.388s
+transformed with optimization: 23.021s
+
+ii.
+Both with and without optimization, the original program was slightly faster.
+
+iii.
+throw/catch were specifically designed for handling exceptions, so the compiler does better job at optimizing them.

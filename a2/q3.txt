@@ -1,0 +1,34 @@
+a.
+without -multi flag:
+17511955
+17506543
+18763452
+17511001
+20000000
+17462238
+17512349
+16257092
+17508018
+16216241
+
+with -multi flag:
+13344060
+13380554
+12433179
+13214489
+11500937
+13204387
+13175062
+11364241
+10366025
+10333449
+
+b.
+No. If += operation is implemented with load and store, transitions can occur during sequence and we never know which thread will run in what order.
+
+c.
+Smallest: 10000000, because if one thread runs all of its iterations during the transition of the other thread's load-store sequence, all the operations of one thread will be ignored.
+Largest: 20000000, when none of the above issues occur.
+
+d.
+In multiprocessor case, the transition during load-store sequence occurs more often because the two processes actually run concurrently without even context switching.

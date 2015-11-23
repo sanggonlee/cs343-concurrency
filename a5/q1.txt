@@ -1,0 +1,19 @@
+Timing with PAD not defined: 44.32u 0.13s 0:22.31
+Timing with PAD defined: 7.09u 0.05s 0:03.56
+
+- Reason for difference between time with respect to memory location: Here is my
+  guess.. The memory size for long int is 8 bytes. When the counters are 
+  aligned with 64 bytes, they are on the first place of a page so can be 
+  accessed immediately. When not, they are aligned with their size, 8 bytes, so
+  after accessing a page an additional work is required to search the location
+  to access the variable, resulting in poorer performance.
+
+- Order of addresses of the global variables: The global variables are stored in
+  heap, and stack and heap grow towards each other. Whether a stack/heap grows
+  upward or downward depends on what platform the program is run, but in this
+  case the heap grows downward and stack grows upward and that is why the adresses
+  of the global variables are in decreasing order.
+  
+- Why cast (void *) for counters: Most pointer variables are cast to (void *)
+  but it is not defined for volatile pointers, so C++ implicitly casts to bool,
+  so 1 is printed if it is not cast to (void *).

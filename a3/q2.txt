@@ -1,0 +1,21 @@
+i.
+BUSY (with optimization): 1.537s
+NOBUSY (with optimization): 2.097s
+BUSY (without optimization): 1.689s
+NOBUSY (without optimization): 2.157s
+
+ii.
+Both with and without optimization, NOBUSY took approximately 130% more time.
+
+iii.
+NOBUSY synchronizes barging, so it blocks tasks (which would've been run if not synchronized) and wait for the tasks signalled so those waiting times are responsible for the delays.
+
+iv.
+BUSY (with multi): 55.274s
+NOBUSY (with multi): 59.652s
+
+v.
+Multiprocessor execution took about 36 times than uniprocessor execution for BUSY, and 28 times more for NOBUSY.
+
+vi.
+The added code increases the number of kernel threads, so some portion of operations are run by kernel threads instead of user threads. Kernel threads are inefficient compared to user threads because of context switch and cache evictions.

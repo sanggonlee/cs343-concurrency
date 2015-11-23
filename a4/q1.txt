@@ -1,0 +1,11 @@
+1 task without HEAP (times=2000000000): 5.66u 0:05.66
+2 tasks without HEAP (times=2000000000): 11.33u 0:05.67
+4 tasks without HEAP (times=2000000000): 22.69u 0:05.69
+
+1 task with HEAP (times=100000000): 8.07u 0:08.08
+2 tasks with HEAP (times=10000000): 16.69u 0:08.36
+4 tasks with HEAP (times=5000000): 44.36u 0:11.88
+
+The differences in the timing results for different number of tasks is because the user time measures the time spent by all tasks combined, so the time measured is (almost) proportional to the number of tasks. The minor difference between real times is due to the context switching.
+
+The performance between the execution with and without using heap memory is because of the fact that it is much slower to allocate memory on heap than stack. Stack memory allocation simply involves changing the stack pointer. When allocating to heap, a free block with apropriate size needs to be searched and book-keeping needs to be managed.

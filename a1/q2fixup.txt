@@ -1,0 +1,12 @@
+i.
+Original code without optimization: 10.232s
+Transformed code without optimization: 6.873s
+
+Original code with optimization: 6.891s
+Transformed code with optimization: 3.275s
+
+ii.
+Both with and without optimization, the transformed code ran faster.
+
+iii.
+Because resumptions should be rare in real world. Fixup routine was implemented simply by function pointer, so it should be fast.

@@ -1,0 +1,5 @@
+This is a deadlock.
+Assuming that by "block" we mean an Angel is in stone state waiting for 
+an entity to blink, the Angels are waiting for each other to blink but
+they all blocked so none of them can actually blink. Since the Angels don't
+change states while they are blocking, (in stone state) this is not a livelock.

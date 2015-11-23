@@ -1,0 +1,307 @@
+*****************************************************************************
+INVALID INPUT TESTING
+
+	Wrong number of command line parameters:
+		sk5lee@ubuntu1204-006:~/cs343/a5$ ./vote 6 3 1 1
+		Usage: vote [ V [ G [ Seed ] ] ]
+	
+	Second parameter is not a positive odd integer:
+		sk5lee@ubuntu1204-006:~/cs343/a5$ ./vote 6 2
+		ERROR: G should be a positive odd integer.
+	
+	First parameter is not divisible by the second parameter
+		sk5lee@ubuntu1204-006:~/cs343/a5$ ./vote 6 5
+		ERROR: V should be divisible by G.
+
+*****************************************************************************
+TESTING FOR EXTERNAL SCHEDULING
+
+	INPUT:
+		./vote 12 3 50
+	
+	OUTPUT:
+		Voter0	Voter1	Voter2	Voter3	Voter4	Voter5	Voter6	Voter7	Voter8	Voter9	Voter10	Voter11
+		=======	=======	=======	=======	=======	=======	=======	=======	=======	=======	=======	=======
+		S
+		V s
+		B 1									S
+											V s
+						S					B 2
+						V p
+						C
+		...	...	...	...	F s	...	...	...	...	...	...	...
+							S				U 1		S
+		...	...	...	...	...	...	...	...	...	F s	...	...
+		U 0			S
+		F s	...	...	...	...	...	...	...	...	...	...	...
+							V p
+							B 1						V s
+					V s								B 2
+					C
+		...	...	...	F s	...	...	...	...	...	...	...	...
+													U 1
+		...	...	...	...	...	...	...	...	...	...	...	F s
+			S				U 0			S
+		...	...	...	...	...	F s	...	...	...	...	...	...
+										V s
+			V s					S		B 1
+			B 2					V p
+								C
+		...	...	...	...	...	...	F s	...	...	...	...	...
+			U 1						S			S
+		...	F s	...	...	...	...	...	...	...	...	...	...
+										U 0
+		...	...	...	...	...	...	...	...	F s	...	...	...
+									V p
+									B 1			V s
+				S								B 2
+				V s
+				C
+		...	...	F s	...	...	...	...	...	...	...	...	...
+												U 1
+		...	...	...	...	...	...	...	...	...	...	F s	...
+									U 0
+		...	...	...	...	...	...	...	F s	...	...	...	...
+		=================
+		All tours started
+	
+	ANALYSIS:
+		The output satisfies the assignment specification requirements.
+		In addition, within each group voting process each voter is unblocked
+		in first-arrive last-out basis, which agrees with _Accept()'s stack
+		behaviour and no barging is observed.
+
+*****************************************************************************
+TESTING FOR INTERNAL SCHEDULING
+
+	INPUT:
+		./vote 12 3 50
+
+	OUTPUT:
+		Voter0	Voter1	Voter2	Voter3	Voter4	Voter5	Voter6	Voter7	Voter8	Voter9	Voter10	Voter11
+		=======	=======	=======	=======	=======	=======	=======	=======	=======	=======	=======	=======
+		S
+		V s
+		B 1									S
+											V s
+						S					B 2
+						V p
+						C
+		...	...	...	...	F s	...	...	...	...	...	...	...
+		U 1					S						S
+		F s	...	...	...	...	...	...	...	...	...	...	...
+					S						U 0
+		...	...	...	...	...	...	...	...	...	F s	...	...
+							V p
+							B 1						V s
+					V s								B 2
+					C
+		...	...	...	F s	...	...	...	...	...	...	...	...
+							U 1
+		...	...	...	...	...	F s	...	...	...	...	...	...
+			S							S			U 0
+		...	...	...	...	...	...	...	...	...	...	...	F s
+										V s
+			V s					S		B 1
+			B 2					V p
+								C
+		...	...	...	...	...	...	F s	...	...	...	...	...
+									S	U 1		S
+		...	...	...	...	...	...	...	...	F s	...	...	...
+			U 0
+		...	F s	...	...	...	...	...	...	...	...	...	...
+									V p
+									B 1			V s
+				S								B 2
+				V s
+				C
+		...	...	F s	...	...	...	...	...	...	...	...	...
+									U 1
+		...	...	...	...	...	...	...	F s	...	...	...	...
+												U 0
+		...	...	...	...	...	...	...	...	...	...	F s	...
+		=================
+		All tours started
+	
+	ANALYSIS:
+		The output satisfies the assignment specification requirements.
+		In addition, within each group voting process each voter is unblocked
+		in first-arrive first-out basis except for the last voter (because the
+		last voter unblocks other voters without blocking), which agrees with 
+		uCondition's queue behaviour and no barging is observed.
+
+*****************************************************************************
+TESTING FOR INTERNAL SCHEDULING WITH BARGING (JAVA MONITOR)
+
+	INPUT:
+		./vote 12 3 50
+
+	OUTPUT:
+		Voter0	Voter1	Voter2	Voter3	Voter4	Voter5	Voter6	Voter7	Voter8	Voter9	Voter10	Voter11
+		=======	=======	=======	=======	=======	=======	=======	=======	=======	=======	=======	=======
+		S
+		V s
+		B 1									S
+											V s
+						S					B 2
+						V p
+						C
+		...	...	...	...	F s	...	...	...	...	...	...	...
+							S				U 1		S
+		...	...	...	...	...	...	...	...	...	F s	...	...
+		U 0			S
+		F s	...	...	...	...	...	...	...	...	...	...	...
+							V p
+							B 1						V s
+					V s								B 2
+					C
+		...	...	...	F s	...	...	...	...	...	...	...	...
+													U 1
+		...	...	...	...	...	...	...	...	...	...	...	F s
+			S							S
+							U 0	S		b
+		...	...	...	...	...	F s	...	...	...	...	...	...
+										V p
+			V s						S	B 1		S
+			B 2					V s
+								C
+		...	...	...	...	...	...	F s	...	...	...	...	...
+			U 1	S					b			b
+		...	F s	...	...	...	...	...	...	...	...	...	...
+										U 0
+		...	...	...	...	...	...	...	...	F s	...	...	...
+												V p
+				V s								B 1
+				B 2					V s
+									C
+		...	...	...	...	...	...	...	F s	...	...	...	...
+				U 1
+		...	...	F s	...	...	...	...	...	...	...	...	...
+												U 0
+		...	...	...	...	...	...	...	...	...	...	F s	...
+		=================
+		All tours started
+
+	ANALYSIS:
+		The output satisfies the assignment specification requirements.
+		In addition, bargings are observed resulting in the inconsistent
+		orderings of unblocking.
+
+*****************************************************************************
+TESTING FOR AUTOMATIC-SIGNAL MONITOR
+
+	INPUT:
+		./vote 12 3 50
+
+	OUTPUT:
+		Voter0	Voter1	Voter2	Voter3	Voter4	Voter5	Voter6	Voter7	Voter8	Voter9	Voter10	Voter11
+		=======	=======	=======	=======	=======	=======	=======	=======	=======	=======	=======	=======
+		S
+		V s
+		B 1									S
+											V s
+						S					B 2
+						V p
+						C
+		...	...	...	...	F s	...	...	...	...	...	...	...
+							S				U 1		S
+		...	...	...	...	...	...	...	...	...	F s	...	...
+		U 0			S
+		F s	...	...	...	...	...	...	...	...	...	...	...
+							V p
+							B 1						V s
+					V s								B 2
+					C
+		...	...	...	F s	...	...	...	...	...	...	...	...
+													U 1
+		...	...	...	...	...	...	...	...	...	...	...	F s
+			S				U 0			S
+		...	...	...	...	...	F s	...	...	...	...	...	...
+										V s
+			V s					S		B 1
+			B 2					V p
+								C
+		...	...	...	...	...	...	F s	...	...	...	...	...
+			U 1						S			S
+		...	F s	...	...	...	...	...	...	...	...	...	...
+										U 0
+		...	...	...	...	...	...	...	...	F s	...	...	...
+									V p
+									B 1			V s
+				S								B 2
+				V s
+				C
+		...	...	F s	...	...	...	...	...	...	...	...	...
+												U 1
+		...	...	...	...	...	...	...	...	...	...	F s	...
+									U 0
+		...	...	...	...	...	...	...	F s	...	...	...	...
+		=================
+		All tours started
+
+	ANALYSIS:
+		The output satisfies the assignment specification requirements.
+		In the source code it can be observed that only AUTOMATIC SIGNAL,
+		WAITUNTIL and RETURN were used for scheduling.
+
+*****************************************************************************
+TESTING FOR SERVER TASK
+
+	INPUT:
+		./vote 12 3 50
+
+	OUTPUT:
+		Voter0	Voter1	Voter2	Voter3	Voter4	Voter5	Voter6	Voter7	Voter8	Voter9	Voter10	Voter11
+		=======	=======	=======	=======	=======	=======	=======	=======	=======	=======	=======	=======
+		S									S
+		V s
+		B 1				S	S				V s		S
+					S	V p					B 2
+						B 3
+		U 2				C
+		F s	...	...	...	...	...	...	...	...	...	...	...
+											U 1
+		...	...	...	...	...	...	...	...	...	F s	...	...
+						U 0
+		...	...	...	...	F s	...	...	...	...	...	...	...
+							V p
+			S				B 1			S			V s
+					V s			S					B 2
+					B 3
+					C		U 2
+		...	...	...	...	...	F s	...	...	...	...	...	...
+													U 1
+		...	...	...	...	...	...	...	...	...	...	...	F s
+					U 0
+		...	...	...	F s	...	...	...	...	...	...	...	...
+									S	V s		S
+			V s							B 1
+			B 2	S				V p
+								B 3
+								C		U 2
+		...	...	...	...	...	...	...	...	F s	...	...	...
+			U 1
+		...	F s	...	...	...	...	...	...	...	...	...	...
+								U 0
+		...	...	...	...	...	...	F s	...	...	...	...	...
+									V p
+									B 1			V s
+				V s								B 2
+				B 3
+				C					U 2
+		...	...	...	...	...	...	...	F s	...	...	...	...
+												U 1
+		...	...	...	...	...	...	...	...	...	...	F s	...
+				U 0
+		...	...	F s	...	...	...	...	...	...	...	...	...
+		=================
+		All tours started
+
+	ANALYSIS:
+		The output satisfies the assignment specification requirements.
+		In the source code it can be seen that the server's main() does
+		majority of the job and client (voter calling vote() method) does
+		minimal job. Also, in this design model the last voter also blocks,
+		as the output exhibits. All the tasks start voting and get unblocked
+		in sequential order, first-arrive first-out basis.
+

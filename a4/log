@@ -1,0 +1,234 @@
+uC++ Version 6.1.0 (multiple processor) (debug) (no yield) (no verify) (no profile)
+In file included from q2printer.h:5:0,
+                 from q2tallyVotes.h:4,
+                 from q2.cc:2:
+q2voter.h:9:475: error: ‘TallyVotes’ does not name a type
+  TallyVotes &tallier;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ^
+q2voter.h:10:2: error: ‘Printer’ does not name a type
+  Printer &printer;
+  ^
+q2voter.h:12:2: error: ‘States’ does not name a type
+  States state;
+  ^
+q2voter.h:28:28: error: ‘TallyVotes’ has not been declared
+     Voter( unsigned int id, TallyVotes &voteTallier, Printer &printer )
+                            ^
+q2voter.h:28:55: error: ‘Printer’ has not been declared
+     Voter( unsigned int id, TallyVotes &voteTallier, Printer &printer )
+                                                       ^
+q2voter.h: In member function ‘virtual void Voter::main()’:
+q2voter.h:16:2: error: ‘printer’ was not declared in this scope
+   printer.print(id, state);
+  ^
+In file included from <command-line>:1:0:
+/usr/local/u++-6.1.0/inc/uC++.h:2070:8: error: ‘uBaseTask::State uBaseTask::state’ is private
+     State state;     // current state of task
+        ^
+In file included from q2printer.h:5:0,
+                 from q2tallyVotes.h:4,
+                 from q2.cc:2:
+q2voter.h:16:25: error: within this context
+   printer.print(id, state);
+                         ^
+q2voter.h:17:2: error: ‘Tour’ was not declared in this scope
+   Tour votingFor = (Tour)mprng(1);
+  ^
+In file included from <command-line>:1:0:
+/usr/local/u++-6.1.0/inc/uC++.h:2070:8: error: ‘uBaseTask::State uBaseTask::state’ is private
+     State state;     // current state of task
+        ^
+In file included from q2printer.h:5:0,
+                 from q2tallyVotes.h:4,
+                 from q2.cc:2:
+q2voter.h:18:2: error: within this context
+   state = Vote;
+  ^
+q2voter.h:18:8: error: cannot convert ‘Voter::States’ to ‘uBaseTask::State’ in assignment
+   state = Vote;
+        ^
+In file included from <command-line>:1:0:
+/usr/local/u++-6.1.0/inc/uC++.h:2070:8: error: ‘uBaseTask::State uBaseTask::state’ is private
+     State state;     // current state of task
+        ^
+In file included from q2printer.h:5:0,
+                 from q2tallyVotes.h:4,
+                 from q2.cc:2:
+q2voter.h:19:25: error: within this context
+   printer.print(id, state, votingFor);
+                         ^
+q2voter.h:19:33: error: ‘votingFor’ was not declared in this scope
+   printer.print(id, state, votingFor);
+                                 ^
+q2voter.h:20:2: error: ‘TallyVotes’ has not been declared
+   TallyVotes::Tour voteResult = tallier.vote(id, votingFor);
+  ^
+In file included from <command-line>:1:0:
+/usr/local/u++-6.1.0/inc/uC++.h:2070:8: error: ‘uBaseTask::State uBaseTask::state’ is private
+     State state;     // current state of task
+        ^
+In file included from q2printer.h:5:0,
+                 from q2tallyVotes.h:4,
+                 from q2.cc:2:
+q2voter.h:22:2: error: within this context
+   state = Finished;
+  ^
+q2voter.h:22:8: error: cannot convert ‘Voter::States’ to ‘uBaseTask::State’ in assignment
+   state = Finished;
+        ^
+q2voter.h: In constructor ‘Voter::Voter(unsigned int, int&, int&, UPP::uAction)’:
+q2voter.h:29:37: error: class ‘Voter’ does not have any field named ‘tallier’
+     : tallier(voteTallier)
+                                     ^
+q2voter.h:30:4: error: class ‘Voter’ does not have any field named ‘printer’
+     , printer(printer)
+    ^
+In file included from <command-line>:1:0:
+/usr/local/u++-6.1.0/inc/uC++.h:2070:8: error: ‘uBaseTask::State uBaseTask::state’ is private
+     State state;     // current state of task
+        ^
+In file included from q2printer.h:5:0,
+                 from q2tallyVotes.h:4,
+                 from q2.cc:2:
+q2voter.h:32:2: error: within this context
+      state = Start;
+  ^
+q2voter.h:32:8: error: cannot convert ‘Voter::States’ to ‘uBaseTask::State’ in assignment
+      state = Start;
+        ^
+In file included from q2tallyVotes.h:4:0,
+                 from q2.cc:2:
+q2printer.h: At global scope:
+q2printer.h:93:59: error: ‘TallyVotes’ has not been declared
+     void print( unsigned int id, Voter::States state, TallyVotes::Tour vote ) {
+                                                           ^
+q2printer.h:93:78: error: expected ‘,’ or ‘...’ before ‘vote’
+     void print( unsigned int id, Voter::States state, TallyVotes::Tour vote ) {
+                                                                              ^
+q2printer.h: In member function ‘void Printer::resetBuffer()’:
+q2printer.h:15:22: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   for (int i=0; i<8*numVoters; i+=1) {
+                      ^
+q2printer.h:19:15: warning: converting to non-pointer type ‘char’ from NULL [-Wconversion-null]
+     buffer[i] = NULL;
+               ^
+q2printer.h: In member function ‘void Printer::printOut()’:
+q2printer.h:30:18: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   for (i=0; i<8*numVoters; i+=1) {
+                  ^
+q2printer.h:31:23: warning: NULL used in arithmetic [-Wpointer-arith]
+    if (buffer[i] == NULL) {
+                       ^
+q2printer.h: In constructor ‘Printer::Printer(unsigned int, UPP::uAction)’:
+q2printer.h:45:18: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+      for (i=0; i<voters; i+=1) {
+                  ^
+q2printer.h:63:18: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+      for (i=0; i<8*voters; i+=1) {
+                  ^
+q2printer.h: In member function ‘void Printer::print(unsigned int, Voter::States)’:
+q2printer.h:80:7: error: ‘Start’ was not declared in this scope
+       case Start:
+       ^
+q2printer.h:83:7: error: ‘Complete’ was not declared in this scope
+       case Complete:
+       ^
+q2printer.h: In member function ‘void Printer::print(unsigned int, Voter::States, int)’:
+q2printer.h:96:7: error: ‘Vote’ was not declared in this scope
+       case Vote:
+       ^
+q2printer.h:99:7: error: ‘vote’ was not declared in this scope
+        if (vote == Picture) {
+       ^
+q2printer.h:99:15: error: ‘Picture’ was not declared in this scope
+        if (vote == Picture) {
+               ^
+q2printer.h:105:7: error: ‘Finished’ was not declared in this scope
+       case Finished:
+       ^
+q2printer.h:106:22: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+        for (int i=0; i<numVoters; i+=1) {
+                      ^
+q2printer.h:113:7: error: ‘vote’ was not declared in this scope
+        if (vote == Picture) {
+       ^
+q2printer.h:113:15: error: ‘Picture’ was not declared in this scope
+        if (vote == Picture) {
+               ^
+q2printer.h: In member function ‘void Printer::print(unsigned int, Voter::States, unsigned int)’:
+q2printer.h:129:7: error: ‘Block’ was not declared in this scope
+       case Block:
+       ^
+q2printer.h:132:7: error: ‘Unblock’ was not declared in this scope
+       case Unblock:
+       ^
+In file included from q2.cc:2:0:
+q2tallyVotes.h: In constructor ‘TallyVotes::TallyVotes(unsigned int, Printer&)’:
+q2tallyVotes.h:28:15: warning: ‘TallyVotes::groupSize’ will be initialized after [-Wreorder]
+     unsigned int groupSize;
+               ^
+q2tallyVotes.h:27:12: warning:   ‘Printer& TallyVotes::printer’ [-Wreorder]
+     Printer &printer;
+            ^
+q2tallyVotes.h:33:2: warning:   when initialized here [-Wreorder]
+     TallyVotes( unsigned int group, Printer &printer )
+  ^
+q2tallyVotes.h: In member function ‘TallyVotes::Tour TallyVotes::vote(unsigned int, TallyVotes::Tour)’:
+q2tallyVotes.h:44:29: error: no matching function for call to ‘uCondLock::wait()’
+    syncGroupCondLock.wait();
+                             ^
+q2tallyVotes.h:44:29: note: candidates are:
+In file included from <command-line>:1:0:
+/usr/local/u++-6.1.0/inc/uC++.h:928:7: note: void uCondLock::wait(uOwnerLock&)
+     void wait( uOwnerLock &lock );
+       ^
+/usr/local/u++-6.1.0/inc/uC++.h:928:7: note:   candidate expects 1 argument, 0 provided
+/usr/local/u++-6.1.0/inc/uC++.h:929:7: note: bool uCondLock::wait(uOwnerLock&, uDuration)
+     bool wait( uOwnerLock &lock, uDuration duration );
+       ^
+/usr/local/u++-6.1.0/inc/uC++.h:929:7: note:   candidate expects 2 arguments, 0 provided
+/usr/local/u++-6.1.0/inc/uC++.h:930:7: note: bool uCondLock::wait(uOwnerLock&, uTime)
+     bool wait( uOwnerLock &lock, uTime time );
+       ^
+/usr/local/u++-6.1.0/inc/uC++.h:930:7: note:   candidate expects 2 arguments, 0 provided
+q2.cc: In member function ‘virtual void uMain::main()’:
+q2.cc:48:19: error: no matching function for call to ‘Voter::Voter()’
+  Voter voters[V];
+                   ^
+q2.cc:48:19: note: candidates are:
+In file included from q2printer.h:5:0,
+                 from q2tallyVotes.h:4,
+                 from q2.cc:2:
+q2voter.h:28:2: note: Voter::Voter(unsigned int, int&, int&, UPP::uAction)
+     Voter( unsigned int id, TallyVotes &voteTallier, Printer &printer )
+  ^
+q2voter.h:28:2: note:   candidate expects 4 arguments, 0 provided
+In file included from q2printer.h:5:0,
+                 from q2tallyVotes.h:4,
+                 from q2.cc:2:
+q2voter.h:9:39: note: Voter::Voter(Voter&)
+  TallyVotes &tallier;
+                                       ^
+q2voter.h:9:39: note:   candidate expects 1 argument, 0 provided
+q2.cc:49:35: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (unsigned int vId=0; vId<V; vId+=1) {
+                                   ^
+q2.cc:50:58: error: no matching function for call to ‘Voter::Voter(unsigned int&, TallyVotes&, Printer&)’
+   voters[vId] = new Voter(vId, tallyVotes, printer);
+                                                          ^
+q2.cc:50:58: note: candidates are:
+In file included from q2printer.h:5:0,
+                 from q2tallyVotes.h:4,
+                 from q2.cc:2:
+q2voter.h:28:2: note: Voter::Voter(unsigned int, int&, int&, UPP::uAction)
+     Voter( unsigned int id, TallyVotes &voteTallier, Printer &printer )
+  ^
+q2voter.h:28:2: note:   no known conversion for argument 2 from ‘TallyVotes’ to ‘int&’
+In file included from q2printer.h:5:0,
+                 from q2tallyVotes.h:4,
+                 from q2.cc:2:
+q2voter.h:9:39: note: Voter::Voter(Voter&)
+  TallyVotes &tallier;
+                                       ^
+q2voter.h:9:39: note:   candidate expects 1 argument, 3 provided
+make: *** [q2.o] Error 1
