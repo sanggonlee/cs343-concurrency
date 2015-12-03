@@ -1,12 +1,12 @@
 Timing with PAD not defined: 44.32u 0.13s 0:22.31
 Timing with PAD defined: 7.09u 0.05s 0:03.56
 
-- Reason for difference between time with respect to memory location: Here is my
-  guess.. The memory size for long int is 8 bytes. When the counters are 
-  aligned with 64 bytes, they are on the first place of a page so can be 
-  accessed immediately. When not, they are aligned with their size, 8 bytes, so
-  after accessing a page an additional work is required to search the location
-  to access the variable, resulting in poorer performance.
+- Reason for difference between time with respect to memory location: Normally a cache
+  line contains multiple variables, so when it is not aligned with 64 bytes and when
+  the same memory location is read/written continually, cache thrashing occurs (in
+  this case, false sharing). If the memory locations are aligned with 64 bytes however,
+  it is ensured that each call to cache brings only one variable at a time, not having
+  to excessively read/write to cache every time.
 
 - Order of addresses of the global variables: The global variables are stored in
   heap, and stack and heap grow towards each other. Whether a stack/heap grows
