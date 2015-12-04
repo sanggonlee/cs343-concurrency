@@ -3,6 +3,10 @@
 #include <iostream>
 using namespace std;
 
+/*
+ *	Main routine for Parent
+ *	Simply periodically deposit to the bank by random amount
+ */
 void Parent::main() {
 	printer.print(Printer::Kind::Parent, 'S');
 	for ( int a=0;a<60;a++ ) {
@@ -19,6 +23,9 @@ void Parent::main() {
 	printer.print(Printer::Kind::Parent, 'F');
 }
 
+/*
+ *	Constructor for Parent
+ */
 Parent::Parent(Printer &prt, Bank &bank, unsigned int numStudents, unsigned int parentalDelay)
 : printer(prt)
 , bank(bank)
@@ -26,5 +33,8 @@ Parent::Parent(Printer &prt, Bank &bank, unsigned int numStudents, unsigned int 
 , parentalDelay(parentalDelay) {
 }
 
+/*
+ *	Destructor for Parent
+ */
 Parent::~Parent() {
 }

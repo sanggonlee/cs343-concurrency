@@ -34,11 +34,13 @@ void uMain::main() {
 			cerr << "Usage: soda [ config-file [ Seed ] ]" << endl;
 	}
 	
+	// Get the config parameters from file
 	ConfigParms params;
 	processConfigFile(configFile, params);
 	
 	mprng.seed(seed);
 
+	// Start tasks
 	Printer printer(params.numStudents, params.numVendingMachines, params.numCouriers);
 	Bank bank(params.numStudents);
 	Parent parent(printer, bank, params.numStudents, params.parentalDelay);
@@ -58,11 +60,12 @@ void uMain::main() {
 		students[s] = new Student(printer, nameServer, watcardOffice, groupoff, s, params.maxPurchases);
 	}
 	
-	// wait for students to finish
+	// Wait for students to finish
 	for (unsigned int s=0; s<params.numStudents; s++) {
 		delete students[s];
 	}
 
+	// Finish BottlingPlant before finishing VendingMachine's to prevent deadlock
 	delete bottlingPlant;
 	for (unsigned int v=0; v<params.numVendingMachines; v++) {
 		delete vendingMachines[v];

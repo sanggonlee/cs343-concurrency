@@ -1,6 +1,9 @@
 #include "nameserver.h"
 #include "vendingmachine.h"
 
+/*
+ *	Main routine for NameServer
+ */
 void NameServer::main() {
 	printer.print(Printer::Kind::NameServer, 'S');
 	for (unsigned int i=0; i<numVendingMachines; i++) {
@@ -16,6 +19,9 @@ void NameServer::main() {
 	}
 }
 
+/*
+ *	Constructor for NameServer
+ */
 NameServer::NameServer(Printer &prt, unsigned int numVendingMachines, unsigned int numStudents)
 : printer(prt)
 , numVendingMachines(numVendingMachines)
@@ -31,11 +37,18 @@ NameServer::NameServer(Printer &prt, unsigned int numVendingMachines, unsigned i
 	}
 }
 
+/*
+ *	Destructor for NameServer
+ */
 NameServer::~NameServer() {
 	delete[] machines;
 	delete[] currStudentPositions;
 }
 
+/*
+ *	Register a VendingMachine and assign a Student to a VendingMachine,
+ *	by first-come-first-serve basis
+ */
 void NameServer::VMregister(VendingMachine *vendingMachine) {
 	machines[currAssignment] = vendingMachine;
 	currStudentPositions[currAssignment % numStudents] = currAssignment;
@@ -43,16 +56,24 @@ void NameServer::VMregister(VendingMachine *vendingMachine) {
 	currAssignment = (currAssignment+1) % numVendingMachines;
 }
 
+/*
+ *	Give a VendingMachine to the calling Student
+ */
 VendingMachine *NameServer::getMachine(unsigned int id) {
+	// If the Student's assigned Vending Machine is not registerd, block until it is
 	while (currStudentPositions[id] == (unsigned int)(-1)) {
 		_Accept(VMregister);
 	}
 	VendingMachine *machine = machines[currStudentPositions[id]];
+	// Assign next VendingMachine to this Student for next time
 	currStudentPositions[id] = (currStudentPositions[id]+1) % numVendingMachines;
 	printer.print(Printer::Kind::NameServer, 'N', (int)id, (int)currStudentPositions[id]);
 	return machine;
 }
 
+/*
+ *	Give all the machines to Truck
+ */
 VendingMachine **NameServer::getMachineList() {
 	return machines;
 }

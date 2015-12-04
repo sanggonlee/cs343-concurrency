@@ -3,14 +3,19 @@
 #include <iostream>
 using namespace std;
 
+/*
+ *	Main routine for Groupoff
+ */
 void Groupoff::main() {
 	printer.print(Printer::Kind::Groupoff, 'S');
+	// Only assign one gift card to each Student
 	for (unsigned int g=0; g<numStudents; g++) {
 		_Accept(~Groupoff) {
 			break;
 		} or _Accept(giftCard) {
 			yield(groupoffDelay);
 			unsigned int checking;
+			// Loop until finding a future gift not used already
 			for ( ;; ) {
 				checking = mprng(numStudents-1);
 				if (!used[checking]) {
@@ -28,12 +33,18 @@ void Groupoff::main() {
 	_Accept(~Groupoff);
 }
 
+/*
+ *	Give a new future gift card every time it's called
+ */
 WATCard::FWATCard Groupoff::giftCard() {
 	WATCard::FWATCard ret = futures[numGiven];
 	numGiven++;
 	return ret;
 }
 
+/*
+ *	Constructor for Groupoff
+ */
 Groupoff::Groupoff(Printer &prt, unsigned int numStudents, unsigned int sodaCost, unsigned int groupoffDelay)
 : printer(prt)
 , numStudents(numStudents)
@@ -47,6 +58,9 @@ Groupoff::Groupoff(Printer &prt, unsigned int numStudents, unsigned int sodaCost
 	}
 }
 
+/*
+ *	Destructor for Groupoff
+ */
 Groupoff::~Groupoff() {
 	for (unsigned int i=0; i<numStudents; i++) {
 		if (futures[i].available()) {
