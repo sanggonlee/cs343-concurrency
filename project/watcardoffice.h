@@ -13,7 +13,6 @@ _Task WATCardOffice {
 	Printer &printer;
 	Bank &bank;
 	unsigned int numCouriers;
-	bool terminating;
 
     struct Job {                           // marshalled arguments and return future
         unsigned int studentId;
@@ -23,9 +22,6 @@ _Task WATCardOffice {
         
         Job( unsigned int sId, unsigned int amount ) 
         	: studentId(sId), amount(amount), watCard(NULL) {}
-        ~Job() {
-        	//delete watCard;
-        }
     };
     _Task Courier {
     	WATCardOffice *office;

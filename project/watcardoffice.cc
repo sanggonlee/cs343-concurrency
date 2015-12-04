@@ -7,6 +7,10 @@ using namespace std;
  *	WATCardOffice methods
  ****************************************/
 
+/*
+ *	Main routine for WATCardOffice
+ *	WATCardOffice is an administrator task
+ */
 void WATCardOffice::main() {
 	printer.print(Printer::Kind::WATCardOffice, 'S');
 	for (unsigned int cId=0; cId<numCouriers; cId++) {
@@ -29,14 +33,19 @@ void WATCardOffice::main() {
 	_Accept(requestWork);
 }
 
+/*
+ *	Constructor for WATCardOffice
+ */
 WATCardOffice::WATCardOffice( Printer &prt, Bank &bank, unsigned int numCouriers )
 : printer(prt)
 , bank(bank)
-, numCouriers(numCouriers)
-, terminating(false) {
+, numCouriers(numCouriers) {
 	couriers = new Courier*[numCouriers];
 }
 
+/*
+ *	Destructor for WATCardOffice
+ */
 WATCardOffice::~WATCardOffice() {
 	for (unsigned int cId=0; cId<numCouriers; cId++) {
 		delete couriers[cId];
@@ -45,6 +54,11 @@ WATCardOffice::~WATCardOffice() {
 	printer.print(Printer::Kind::WATCardOffice, 'F');
 }
 
+/*
+ *	Generate a WATCard which is encapsulated by Job, put the Job into a queue,
+ *	and pass the future WATCard to the caller Student
+ *	A Courier later processes the Job and injects the real WATCard into the future
+ */
 WATCard::FWATCard WATCardOffice::create(unsigned int sid, unsigned int amount) {
 	Job *job = new Job(sid, amount);
 	job->watCard = new WATCard();
@@ -53,6 +67,11 @@ WATCard::FWATCard WATCardOffice::create(unsigned int sid, unsigned int amount) {
 	return job->result;
 }
 
+/*
+ *	Encapsulate the given WATCard with Job, put the Job into a queue and pass
+ *	the future WATCard to the caller Student
+ *	A Courier later processes the Job and injects the given WATCard into the future
+ */
 WATCard::FWATCard WATCardOffice::transfer(unsigned int sid, unsigned int amount, WATCard *card) {
 	Job *job = new Job(sid, amount);
 	job->watCard = card;
@@ -61,6 +80,9 @@ WATCard::FWATCard WATCardOffice::transfer(unsigned int sid, unsigned int amount,
 	return job->result;
 }
 
+/*
+ *	Pops a Job in the front of the queue and pass it to a Courier
+ */
 WATCardOffice::Job *WATCardOffice::requestWork() {
 	Job* job = jobQueue.front();
 	jobQueue.pop();
@@ -77,6 +99,9 @@ WATCardOffice::Job *WATCardOffice::requestWork() {
  *	Courier methods
  ****************************************/
 
+/*
+ *	Main routine for Courier
+ */
 void WATCardOffice::Courier::main() {
 	printer.print(Printer::Kind::Courier, id, 'S');
 	for ( ;; ) {
@@ -96,6 +121,7 @@ void WATCardOffice::Courier::main() {
 			printer.print(Printer::Kind::Courier, id, 'T', (int)job->studentId, (int)job->amount);
 		
 			if (mprng(5) == 0) {
+				// Lost the WATCard. Insert exception to the future
 				delete job->watCard;
 				job->result.exception(new WATCardOffice::Lost);
 			} else {
@@ -106,6 +132,9 @@ void WATCardOffice::Courier::main() {
 	}
 }
 
+/*
+ *	Constructor for Courier
+ */
 WATCardOffice::Courier::Courier(WATCardOffice* office, Bank &bank, Printer &prt, unsigned int id)
 : office(office)
 , bank(bank)
@@ -113,6 +142,10 @@ WATCardOffice::Courier::Courier(WATCardOffice* office, Bank &bank, Printer &prt,
 , id(id) {
 }
 
+/*
+ *	Destructor for Courier
+ *	Couriers get deleted when WATCardOffice is deleted
+ */
 WATCardOffice::Courier::~Courier() {
 	printer.print(Printer::Kind::Courier, id, 'F');
 }
