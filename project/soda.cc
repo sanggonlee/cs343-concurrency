@@ -30,6 +30,7 @@ void uMain::main() {
 			break;
 		default:
 			cerr << "Usage: soda [ config-file [ Seed ] ]" << endl;
+			exit(EXIT_FAILURE);
 	}
 	// Get the config parameters from file
 	ConfigParms params;

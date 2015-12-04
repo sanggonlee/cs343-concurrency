@@ -2,8 +2,6 @@
 #include "watcard.h"
 #include "vendingmachine.h"
 
-#include <iostream>
-using namespace std;
 /*
  *	Main routine for Student
  */
@@ -48,7 +46,7 @@ void Student::main() {
 					try {
 						realWatCard = watCard;
 					} catch (WATCardOffice::Lost e) {
-						// If card lost, delete this card and request to create a new card
+						// If card lost, request to create a new card
 						printer.print(Printer::Kind::Student, id, 'L');
 						watCard = cardOffice.create(id, 5);
 						break TryWatcard;	// Wait for a new card to arrive instead of trying next purchase
@@ -77,14 +75,13 @@ void Student::main() {
 	
 	// This is needed to resolve memory leak when the last purchase was
 	// made with gift card but Watcard was made ready meantime
-	if (watCard.available()) {
-		try {
-			WATCard* garb = watCard();
-			delete garb;
-		} catch (WATCardOffice::Lost e) {
-			// simply ignore if lost, card is deleted by Courier
-		}
+	try {
+		WATCard* garb = watCard();
+		delete garb;
+	} catch (WATCardOffice::Lost e) {
+		// simply ignore if lost, card is deleted by Courier
 	}
+
 	printer.print(Printer::Kind::Student, id, 'F');
 	// Only accept destructor when all the purchases are complete
 	_Accept(~Student);

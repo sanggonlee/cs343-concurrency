@@ -1,7 +1,5 @@
 #include "watcardoffice.h"
 
-#include <iostream>
-using namespace std;
 /****************************************
  *	WATCardOffice methods
  ****************************************/
@@ -106,9 +104,9 @@ WATCardOffice::Job *WATCardOffice::requestWork() {
 void WATCardOffice::Courier::main() {
 	printer.print(Printer::Kind::Courier, id, 'S');
 	for ( ;; ) {
-		_Accept(~Courier) {
-			break;
-		} _Else {
+		//_Accept(~Courier) {
+		//	break;
+		//} _Else {
 			Job *job = office->requestWork();
 			if (job == (Job*)NULL) {
 				// Got Sentinel value, halt the task and wait for destructor
@@ -129,7 +127,7 @@ void WATCardOffice::Courier::main() {
 				job->result.delivery(job->watCard);
 			}
 			delete job;
-		}
+		//}
 	}
 }
 
