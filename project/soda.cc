@@ -24,20 +24,17 @@ void uMain::main() {
 				cerr << "Error: Seed must be greater than 0" << endl;
 				exit(EXIT_FAILURE);
 			}
-			break;
 		case 2:
 			configFile = argv[1];
-			break;
 		case 1:
 			break;
 		default:
 			cerr << "Usage: soda [ config-file [ Seed ] ]" << endl;
 	}
-	
 	// Get the config parameters from file
 	ConfigParms params;
 	processConfigFile(configFile, params);
-	
+
 	mprng.seed(seed);
 
 	// Start tasks

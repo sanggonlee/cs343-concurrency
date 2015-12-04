@@ -2,6 +2,8 @@
 #include "watcard.h"
 #include "vendingmachine.h"
 
+#include <iostream>
+using namespace std;
 /*
  *	Main routine for Student
  */
@@ -48,7 +50,6 @@ void Student::main() {
 					} catch (WATCardOffice::Lost e) {
 						// If card lost, delete this card and request to create a new card
 						printer.print(Printer::Kind::Student, id, 'L');
-						delete realWatCard;
 						watCard = cardOffice.create(id, 5);
 						break TryWatcard;	// Wait for a new card to arrive instead of trying next purchase
 					}

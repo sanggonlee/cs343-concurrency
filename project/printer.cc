@@ -288,9 +288,6 @@ void Printer::print(Kind kind, char state, int value1) {
 		buffer[location+1] = intToChar(value1);
 		buffer[location+2] = '\t';
 	}
-
-	printOut();
-	resetBuffer();
 }
 
 /*
@@ -313,9 +310,6 @@ void Printer::print(Kind kind, char state, int value1, int value2) {
 	}
 	buffer[location+3] = intToChar(value2%10);
 	buffer[location+4] = '\t';
-
-	printOut();
-	resetBuffer();
 }
 
 /*******************************************************************
@@ -339,9 +333,6 @@ void Printer::print(Kind kind, unsigned int lid, char state) {
 	}
 	buffer[location] = state;
 	buffer[location+1] = '\t';
-
-	printOut();
-	resetBuffer();
 }
 
 /*
@@ -360,9 +351,6 @@ void Printer::print(Kind kind, unsigned int lid, char state, int value1) {
 		buffer[location+1] = intToChar(value1);
 		buffer[location+2] = '\t';
 	}
-
-	printOut();
-	resetBuffer();
 }
 
 /*
@@ -385,7 +373,4 @@ void Printer::print(Kind kind, unsigned int lid, char state, int value1, int val
 	}
 	buffer[location+3] = intToChar(value2%10);
 	buffer[location+4] = '\t';
-
-	printOut();
-	resetBuffer();
 }

@@ -61,9 +61,14 @@ void NameServer::VMregister(VendingMachine *vendingMachine) {
  */
 VendingMachine *NameServer::getMachine(unsigned int id) {
 	// If the Student's assigned Vending Machine is not registerd, block until it is
-	while (currStudentPositions[id] == (unsigned int)(-1)) {
+	while (currStudentPositions[id%numVendingMachines] == (unsigned int)(-1)) {
 		_Accept(VMregister);
 	}
+
+	if (id >= numVendingMachines && currStudentPositions[id] == (unsigned int)(-1)) {
+		currStudentPositions[id] = currStudentPositions[id%numVendingMachines];
+	}
+
 	VendingMachine *machine = machines[currStudentPositions[id]];
 	// Assign next VendingMachine to this Student for next time
 	currStudentPositions[id] = (currStudentPositions[id]+1) % numVendingMachines;

@@ -1,5 +1,7 @@
 #include "watcardoffice.h"
 
+#include <iostream>
+using namespace std;
 /****************************************
  *	WATCardOffice methods
  ****************************************/
@@ -26,8 +28,10 @@ void WATCardOffice::main() {
 	
 	// Send Sentinel value through requestWork - Courier::main chain to terminate
 	// tasks and successively delete Courier and WATCardOffice
-	jobQueue.push(NULL);
-	_Accept(requestWork);
+	for (unsigned int c=0; c<numCouriers; c++) {
+		jobQueue.push(NULL);
+		_Accept(requestWork);
+	}
 }
 
 /*

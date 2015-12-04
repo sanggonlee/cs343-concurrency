@@ -6,7 +6,7 @@
  */
 void Parent::main() {
 	printer.print(Printer::Kind::Parent, 'S');
-	for ( int a=0;a<60;a++ ) {
+	for ( ;; ) {
 		_Accept(~Parent) {
 			break;
 		} _Else {
