@@ -1,8 +1,5 @@
 #include "watcardoffice.h"
 
-#include <iostream>
-using namespace std;
-
 /****************************************
  *	WATCardOffice methods
  ****************************************/

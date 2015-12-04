@@ -1,8 +1,5 @@
 #include "parent.h"
 
-#include <iostream>
-using namespace std;
-
 /*
  *	Main routine for Parent
  *	Simply periodically deposit to the bank by random amount

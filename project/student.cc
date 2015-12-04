@@ -2,9 +2,6 @@
 #include "watcard.h"
 #include "vendingmachine.h"
 
-#include <iostream>
-using namespace std;
-
 /*
  *	Main routine for Student
  */

@@ -1,9 +1,6 @@
 #include "truck.h"
 #include "vendingmachine.h"
 
-#include <iostream>
-using namespace std;
-
 /*
  *	Helper function to check if no sodas are in cargo
  */

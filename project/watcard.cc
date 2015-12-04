@@ -1,8 +1,5 @@
 #include "watcard.h"
 
-#include <iostream>
-using namespace std;
-
 /*
  *	Constructor for WATCard
  */

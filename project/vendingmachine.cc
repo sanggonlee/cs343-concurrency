@@ -1,9 +1,6 @@
 #include "vendingmachine.h"
 #include "nameserver.h"
 
-#include <iostream>
-using namespace std;
-
 /*
  *	Main routine for VendingMachine
  */

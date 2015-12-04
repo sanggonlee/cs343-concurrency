@@ -2,9 +2,6 @@
 #include "vendingmachine.h"
 #include "truck.h"
 
-#include <iostream>
-using namespace std;
-
 /*
  *	Main routine for BottlingPlant
  */

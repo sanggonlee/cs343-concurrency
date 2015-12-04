@@ -1,8 +1,5 @@
 #include "groupoff.h"
 
-#include <iostream>
-using namespace std;
-
 /*
  *	Main routine for Groupoff
  */

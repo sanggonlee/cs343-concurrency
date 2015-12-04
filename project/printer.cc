@@ -1,7 +1,6 @@
 #include <iostream>
 #include "printer.h"
 using namespace std;
-#define DEBUG 0
 
 /*
  * Fills the buffer with NULL's except for tabs at every 
@@ -35,7 +34,6 @@ char Printer::intToChar(unsigned int n) {
  */
 void Printer::printOut() {
 	unsigned int i;
-#if !DEBUG
 	// remove tabs working backwards until not whitespace char
 	for (i=8*numEntities-1; i>0; i-=1) {
 		if (buffer[i] == '\t') {
@@ -44,7 +42,6 @@ void Printer::printOut() {
 			break;
 		}
 	}
-#endif
 	// print buffer
 	for (i=0; i<8*numEntities; i+=1) {
 		if (buffer[i] == (char)NULL) {
@@ -270,10 +267,9 @@ void Printer::print(Kind kind, char state) {
 	}
 	buffer[location] = state;
 	buffer[location+1] = '\t';
-#if DEBUG
+
 	printOut();
 	resetBuffer();
-#endif
 }
 
 /*
@@ -292,10 +288,9 @@ void Printer::print(Kind kind, char state, int value1) {
 		buffer[location+1] = intToChar(value1);
 		buffer[location+2] = '\t';
 	}
-#if DEBUG
+
 	printOut();
 	resetBuffer();
-#endif
 }
 
 /*
@@ -318,10 +313,9 @@ void Printer::print(Kind kind, char state, int value1, int value2) {
 	}
 	buffer[location+3] = intToChar(value2%10);
 	buffer[location+4] = '\t';
-#if DEBUG
+
 	printOut();
 	resetBuffer();
-#endif
 }
 
 /*******************************************************************
@@ -345,10 +339,9 @@ void Printer::print(Kind kind, unsigned int lid, char state) {
 	}
 	buffer[location] = state;
 	buffer[location+1] = '\t';
-#if DEBUG
+
 	printOut();
 	resetBuffer();
-#endif
 }
 
 /*
@@ -367,10 +360,9 @@ void Printer::print(Kind kind, unsigned int lid, char state, int value1) {
 		buffer[location+1] = intToChar(value1);
 		buffer[location+2] = '\t';
 	}
-#if DEBUG
+
 	printOut();
 	resetBuffer();
-#endif
 }
 
 /*
@@ -393,8 +385,7 @@ void Printer::print(Kind kind, unsigned int lid, char state, int value1, int val
 	}
 	buffer[location+3] = intToChar(value2%10);
 	buffer[location+4] = '\t';
-#if DEBUG
+
 	printOut();
 	resetBuffer();
-#endif
 }
