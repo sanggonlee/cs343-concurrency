@@ -93,13 +93,13 @@ void WATCardOffice::Courier::main() {
 			printer.print(Printer::Kind::Courier, id, 't', (int)job->studentId, (int)job->amount);
 			bank.withdraw(job->studentId, job->amount);
 			job->watCard->deposit(job->amount);
+			printer.print(Printer::Kind::Courier, id, 'T', (int)job->studentId, (int)job->amount);
 		
 			if (mprng(5) == 0) {
 				delete job->watCard;
 				job->result.exception(new WATCardOffice::Lost);
 			} else {
 				job->result.delivery(job->watCard);
-				printer.print(Printer::Kind::Courier, id, 'T', (int)job->studentId, (int)job->amount);
 			}
 			delete job;
 		}
