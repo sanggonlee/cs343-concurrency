@@ -78,8 +78,12 @@ void Student::main() {
 	// This is needed to resolve memory leak when the last purchase was
 	// made with gift card but Watcard was made ready meantime
 	if (watCard.available()) {
-		WATCard* garb = watCard();
-		delete garb;
+		try {
+			WATCard* garb = watCard();
+			delete garb;
+		} catch (WATCardOffice::Lost e) {
+			// simply ignore if lost, card is deleted by Courier
+		}
 	}
 	printer.print(Printer::Kind::Student, id, 'F');
 	// Only accept destructor when all the purchases are complete
