@@ -104,30 +104,26 @@ WATCardOffice::Job *WATCardOffice::requestWork() {
 void WATCardOffice::Courier::main() {
 	printer.print(Printer::Kind::Courier, id, 'S');
 	for ( ;; ) {
-		//_Accept(~Courier) {
-		//	break;
-		//} _Else {
-			Job *job = office->requestWork();
-			if (job == (Job*)NULL) {
-				// Got Sentinel value, halt the task and wait for destructor
-				delete job;
-				break;
-			}
-		
-			printer.print(Printer::Kind::Courier, id, 't', (int)job->studentId, (int)job->amount);
-			bank.withdraw(job->studentId, job->amount);
-			job->watCard->deposit(job->amount);
-			printer.print(Printer::Kind::Courier, id, 'T', (int)job->studentId, (int)job->amount);
-		
-			if (mprng(5) == 0) {
-				// Lost the WATCard. Insert exception to the future
-				delete job->watCard;
-				job->result.exception(new WATCardOffice::Lost);
-			} else {
-				job->result.delivery(job->watCard);
-			}
+		Job *job = office->requestWork();
+		if (job == (Job*)NULL) {
+			// Got Sentinel value, halt the task and wait for destructor
 			delete job;
-		//}
+			break;
+		}
+
+		printer.print(Printer::Kind::Courier, id, 't', (int)job->studentId, (int)job->amount);
+		bank.withdraw(job->studentId, job->amount);
+		job->watCard->deposit(job->amount);
+		printer.print(Printer::Kind::Courier, id, 'T', (int)job->studentId, (int)job->amount);
+
+		if (mprng(5) == 0) {
+			// Lost the WATCard. Insert exception to the future
+			delete job->watCard;
+			job->result.exception(new WATCardOffice::Lost);
+		} else {
+			job->result.delivery(job->watCard);
+		}
+		delete job;
 	}
 }
 
